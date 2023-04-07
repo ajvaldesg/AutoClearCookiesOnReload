@@ -1,0 +1,16 @@
+{
+    "manifest_version": 3,
+    "name": "Test Storage Extension",
+    "version": "1.0",
+    "description": "A simple extension to test the storage API",
+    "permissions": [
+      "storage"
+    ],
+    "background": {
+      "service_worker": "background.js"
+    },
+    "icons": {
+      "48": "icon.png"
+    }
+  }
+  
