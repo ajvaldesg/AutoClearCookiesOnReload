@@ -8,7 +8,7 @@
 // @grant        none
 // ==/UserScript==
 
-(function () {
+(function() {
     'use strict';
 
     function clearCookies() {
@@ -22,5 +22,7 @@
         }
     }
 
-    window.addEventListener('beforeunload', clearCookies);
+    window.addEventListener('load', function() {
+        setTimeout(clearCookies, 1000);
+    });
 })();
