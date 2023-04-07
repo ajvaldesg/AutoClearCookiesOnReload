@@ -8,7 +8,7 @@
 // @grant        none
 // ==/UserScript==
 
-(function() {
+(function () {
     'use strict';
 
     function clearCookies() {
@@ -22,7 +22,23 @@
         }
     }
 
-    window.addEventListener('load', function() {
-        setTimeout(clearCookies, 1000);
-    });
+    function checkResourcesLoaded() {
+        let resources = window.performance.getEntriesByType('resource');
+        let allResourcesLoaded = true;
+
+        for (let i = 0; i < resources.length; i++) {
+            if (resources[i].responseEnd === 0) {
+                allResourcesLoaded = false;
+                break;
+            }
+        }
+
+        if (allResourcesLoaded) {
+            setTimeout(clearCookies, 1000);
+        } else {
+            setTimeout(checkResourcesLoaded, 100);
+        }
+    }
+
+    window.addEventListener('load', checkResourcesLoaded);
 })();
